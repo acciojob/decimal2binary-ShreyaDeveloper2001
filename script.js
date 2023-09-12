@@ -27,3 +27,7 @@ console.log(`Decimal ${decimalNumber3} to Binary: ${decimalToBinary(decimalNumbe
 }
 
 window.decimalToBinary = decimalToBinary;
+const decimalNumber = 10;
+const binaryResult = decimalToBinary(decimalNumber);
+console.log(`Decimal ${decimalNumber} to Binary: ${binaryResult}`);
+
