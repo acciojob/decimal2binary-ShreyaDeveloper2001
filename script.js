@@ -1,33 +1,47 @@
-function decimalToBinary(num) {
-  //Write you code here
-  if (decimalNumber === 0) {
-    return '0';
+document.addEventListener("DOMContentLoaded", function () {
+  // Array of band names
+  let bandNames = [
+    "The Rolling Stones",
+    "Aerosmith",
+    "The Beatles",
+    "Pink Floyd",
+    "Led Zeppelin",
+    "The Who",
+  ];
+
+  // Function to sort band names without articles
+  function sortBandNamesWithoutArticles(names) {
+    return names.sort((a, b) => {
+      // Regular expression to match articles 'a', 'an', 'the' at the beginning
+      const articleRegex = /^(a|an|the)\s+/i;
+
+      // Remove articles from both names for comparison
+      const nameA = a.replace(articleRegex, "");
+      const nameB = b.replace(articleRegex, "");
+
+      // Compare the modified names
+      return nameA.localeCompare(nameB);
+    });
   }
 
-  let binary = '';
-  while (decimalNumber > 0) {
-    const remainder = decimalNumber % 2;
-    binary = remainder + binary;
-    decimalNumber = Math.floor(decimalNumber / 2);
+  // Sort the band names
+  bandNames = sortBandNamesWithoutArticles(bandNames);
+
+  // Function to create and populate the ul element
+  function populateBandList(names) {
+    const ul = document.getElementById("bands");
+
+    // Clear any existing items in the ul
+    ul.innerHTML = "";
+
+    // Loop through the sorted names and create li elements
+    for (const name of names) {
+      const li = document.createElement("li");
+      li.textContent = name;
+      ul.appendChild(li);
+    }
   }
 
-  return binary;
-}
-
-// Example usage:
-const decimalNumber1 = 7;
-const decimalNumber2 = 10;
-const decimalNumber3 = 33;
-
-console.log(`Decimal ${decimalNumber1} to Binary: ${decimalToBinary(decimalNumber1)}`);
-console.log(`Decimal ${decimalNumber2} to Binary: ${decimalToBinary(decimalNumber2)}`);
-console.log(`Decimal ${decimalNumber3} to Binary: ${decimalToBinary(decimalNumber3)}`);
-
-  
-}
-
-window.decimalToBinary = decimalToBinary;
-const decimalNumber = 10;
-const binaryResult = decimalToBinary(decimalNumber);
-console.log(`Decimal ${decimalNumber} to Binary: ${binaryResult}`);
-
+  // Call the function to populate the ul with sorted band names
+  populateBandList(bandNames);
+});
