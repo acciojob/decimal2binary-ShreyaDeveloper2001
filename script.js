@@ -1,47 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Array of band names
-  let bandNames = [
-    "The Rolling Stones",
-    "Aerosmith",
-    "The Beatles",
-    "Pink Floyd",
-    "Led Zeppelin",
-    "The Who",
-  ];
-
-  // Function to sort band names without articles
-  function sortBandNamesWithoutArticles(names) {
-    return names.sort((a, b) => {
-      // Regular expression to match articles 'a', 'an', 'the' at the beginning
-      const articleRegex = /^(a|an|the)\s+/i;
-
-      // Remove articles from both names for comparison
-      const nameA = a.replace(articleRegex, "");
-      const nameB = b.replace(articleRegex, "");
-
-      // Compare the modified names
-      return nameA.localeCompare(nameB);
-    });
+function decimalToBinary(num) {
+  //Write you code here
+	 if (num === 0) {
+    return "0"; // Special case for decimal 0
   }
 
-  // Sort the band names
-  bandNames = sortBandNamesWithoutArticles(bandNames);
+  let binary = ""; // Initialize an empty string to store binary digits
 
-  // Function to create and populate the ul element
-  function populateBandList(names) {
-    const ul = document.getElementById("bands");
-
-    // Clear any existing items in the ul
-    ul.innerHTML = "";
-
-    // Loop through the sorted names and create li elements
-    for (const name of names) {
-      const li = document.createElement("li");
-      li.textContent = name;
-      ul.appendChild(li);
-    }
+  while (num > 0) {
+    const remainder = num % 2; // Calculate the remainder
+    binary = remainder + binary; // Add the remainder to the beginning of the binary string
+    num = Math.floor(num / 2); // Update the decimal number by dividing it by 2 (integer division)
   }
 
-  // Call the function to populate the ul with sorted band names
-  populateBandList(bandNames);
-});
+  return binary;
+  
+}
+// Test cases
+console.log(decimalToBinary(7));  // Output: "111"
+console.log(decimalToBinary(10)); // Output: "1010"
+console.log(decimalToBinary(33)); // Output: "100001"
+
+window.decimalToBinary = decimalToBinary;
